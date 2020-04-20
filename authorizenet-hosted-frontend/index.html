@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>AuthorizeNet : Hosted form payment gateway example </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+
+  <div class="col-md-4 offset-md-4">
+  <span class="anchor" id="formPayment"></span>
+  <hr class="my-5">
+
+  <div class="card card-outline-secondary">
+      <div class="card-body">
+          <h3 class="text-center">AuthorizeNet : Hosted Payment Gateway</h3>
+          <hr class="my-3">
+
+          <form method="post" id="submitPaymentAmountForm" class="form" role="form" autocomplete="off">
+
+            <div class="form-group row">
+                  <label class="col-md-12">Payment Amount</label>
+                  <div class="form-inline col-md-12">
+                    <div class="input-group col-md-12">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input type="number" pattern="/^-?\d+\.?\d*$/"  onKeyPress="if(this.value.length==8) return false;" class="form-control text-right" id="amount" placeholder="0.00">
+                    </div>
+                </div>
+
+
+              </div>
+
+              <hr class="my-5">
+              <div class="form-group row">
+                  <div class="col-md-12">
+                      <button type="button" id="submitPaymentAmount"  class="btn btn-success btn-md btn-block">
+                          Proceed Payment
+                      </button>
+
+                  </div>
+              </div>
+          </form>
+
+          <form method="post"  id="processPaymentForm" name="processPaymentForm" action="https://test.authorize.net/payment/payment">
+      			<input type="hidden" name="token" id="token" />
+        		<button id="btnContinuePayment" onclick=""  class="d-none btn btn-success btn-md btn-block">Proceed Payment</button>
+        	</form>
+      </div>
+  </div>
+
+
+<p class="copyright" style="text-align:center;padding:40px 0;">
+  Developed by
+<a target="_blank" href="https://www.bhupeshpadiyar.com">Bhupesh Singh Padiyar</a></p>
+
+</body>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+ integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+ crossorigin="anonymous"></script>
+
+
+  <script type="text/javascript">
+
+    function showLoader(event){
+        var id=event.target.id;
+
+        var loaderContent = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Please wait...</span>';
+        $("#"+id).empty();
+        $("#"+id).attr("disabled", true)
+        $("#"+id).append(loaderContent);
+
+     }
+
+    function hideLoader(event){
+      var id=event.target.id;
+      var loaderContent = 'Proceed Payment';
+      $("#"+id).empty();
+      $("#"+id).attr("disabled", false)
+      $("#"+id).append(loaderContent);
+    }
+
+    $( document ).ready(function() {
+        var amountVal = $("#amount").val();
+        if(amountVal == 0 || amountVal ==''  || amountVal == ' ') {
+            $("#proceedPayment").prop('disabled', true);
+        }
+
+        $('#amount').keyup(function() {
+          var amountVal = $("#amount").val();
+          if(amountVal !='') {
+              $("#proceedPayment").prop('disabled', false);
+          } else{
+              $("#proceedPayment").prop('disabled', true);
+          }
+        });
+    });
+
+
+    $("#submitPaymentAmount").click(function(event) {
+
+               var postData = JSON.stringify({amount:$("#amount").val()});
+               var paymentUrl =  "http://localhost:8080/api/payment/token"
+
+               showLoader(event);
+
+               $.ajax({
+                   type:"POST",
+                   url:paymentUrl,
+                   data:postData,
+                   async:true,
+                   contentType: "application/json",
+                   success: function (data) {
+                       //console.log(data);
+                       if(data.status == 200) {
+                          $("#paymentForm").removeClass("d-none");
+                          $("#submitPaymentButton").addClass("d-none");
+                          $("#token").val(data.token);
+                          $("#btnContinuePayment").click();
+                       } else{
+                         hideLoader(event);
+                       }
+                   },
+                   error: function(error){
+                     //console.log(error);
+                     hideLoader(event);
+                   }
+               });
+        });
+
+
+  </script>
+</html>
