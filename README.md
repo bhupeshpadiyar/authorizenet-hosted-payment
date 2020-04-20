@@ -20,7 +20,7 @@ https://bhupeshpadiyar.com/2020/04/authorize.net-payment-gateway-hosted-form-pay
 
 Below is the diagram shows the high level architecture of the application
 
-![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/blob/master/images/application_overview.png)
+![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/master/images/application_overview.png)
 
 ## Steps to Run the project 
 
@@ -47,17 +47,17 @@ Below is the diagram shows the high level architecture of the application
 2. Open index.html file in the browser.
 
 ## Step 3: Enter Payment Amount
-![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/blob/master/images/payment_amount_page.png)
+![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/master/images/payment_amount_page.png)
 
 
 ## Step 4: Enter Payment Detail: Hosted payment page
-![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/blob/master/images/hosted_payment_page.png)
+![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/master/images/hosted_payment_page.png)
 
 ## Step 5: Payment receipt page
-![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/blob/master/images/payment_confirm_receipt_page.png)
+![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/master/images/payment_confirm_receipt_page.png)
 
 ## Step 6: Payment success page
-![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/blob/master/images/payment_success_page.png)
+![alt text](https://raw.githubusercontent.com/bhupeshpadiyar/authorizenet-hosted-payment/master/images/payment_success_page.png)
 
 ## Authors
 
