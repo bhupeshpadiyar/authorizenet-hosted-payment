@@ -3,7 +3,7 @@ Authorize.Net hosted page payment gateway in HTML5, Bootstrap 4, JQuery and Spri
 
 Read full article on my blog http://bhupeshpadiyar.com
 
-https://bhupeshpadiyar.com/2020/04/authorize.net-payment-gateway-hosted-form-payment-integration/
+https://www.bhupeshpadiyar.com/2020/04/authorize.net-hosted-form-payment-gateway-integration-with-spring-boot/
 
 ## Prerequisite
 1. Authorize.Net developers sandbox account.
